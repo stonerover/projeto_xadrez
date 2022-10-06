@@ -15,5 +15,10 @@
             this.qteMovimentos = 0;
             
         }
+
+        public int incrementaQteMovimentos()
+        {
+            return qteMovimentos++;
+        }
     }
 }
