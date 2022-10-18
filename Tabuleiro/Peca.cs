@@ -21,6 +21,11 @@
             return qteMovimentos++;
         }
 
+        public int decrementarQteMovimentos()
+        {
+            return qteMovimentos--;
+        }
+
         public bool existeMovimentosPossiveis()
         {
             bool[,] mat = movimentosPossiveis();
