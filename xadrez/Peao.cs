@@ -18,7 +18,7 @@ namespace xadrez
         private bool existeInimigo(Posicao pos)
         {
             Peca p = tab.peca(pos);
-            return p == null || p.cor != cor;
+            return p != null && p.cor != cor;
         }
 
         private bool livre(Posicao pos)
@@ -36,32 +36,32 @@ namespace xadrez
             if(cor == Cor.Branca)
             {
                 //Mover para frente 
-                pos.definirValores(tab.linhas - 1, tab.colunas);
+                pos.definirValores(posicao.Linha - 1, posicao.Coluna);
                 if(tab.posicaoValida(pos) && livre(pos))
                 {
-                    mat[tab.linhas, tab.colunas] = true;
+                    mat[pos.Linha, pos.Coluna] = true;
                 }
 
                 //Primeiro movimento peao (pode andar duas casas se for o primeiro movimento) 
-                pos.definirValores(tab.linhas - 2, tab.colunas);
+                pos.definirValores(posicao.Linha - 2, posicao.Coluna);
                 if (tab.posicaoValida(pos) && livre(pos) && qteMovimentos == 0)
                 {
-                    mat[tab.linhas, tab.colunas] = true;
+                    mat[pos.Linha, pos.Coluna] = true;
                 }
 
                 //Captura Peao (pode capturar somente na diagonal)
                 //diagonal esquerda 
-                pos.definirValores(tab.linhas - 1, tab.colunas - 1);
+                pos.definirValores(posicao.Linha - 1, posicao.Coluna - 1);
                 if (tab.posicaoValida(pos) && existeInimigo(pos))
                 {
-                    mat[tab.linhas, tab.colunas] = true;
+                    mat[pos.Linha, pos.Coluna] = true;
                 }
 
                 //diagonal direita 
-                pos.definirValores(tab.linhas - 1, tab.colunas + 1);
+                pos.definirValores(posicao.Linha - 1, posicao.Coluna + 1);
                 if (tab.posicaoValida(pos) && existeInimigo(pos))
                 {
-                    mat[tab.linhas, tab.colunas] = true;
+                    mat[pos.Linha, pos.Coluna] = true;
                 }
             }
 
@@ -69,32 +69,32 @@ namespace xadrez
             else
             {
                 //Mover para frente
-                pos.definirValores(tab.linhas + 1, tab.colunas);
+                pos.definirValores(posicao.Linha + 1, posicao.Coluna);
                 if (tab.posicaoValida(pos) && livre(pos))
                 {
-                    mat[tab.linhas, tab.colunas] = true;
+                    mat[pos.Linha, pos.Coluna] = true;
                 }
 
                 //Primeiro movimento peao (pode andar duas casas se for o primeiro movimento)
-                pos.definirValores(tab.linhas + 2, tab.colunas);
+                pos.definirValores(posicao.Linha + 2, posicao.Coluna);
                 if (tab.posicaoValida(pos) && livre(pos) && qteMovimentos == 0)
                 {
-                    mat[tab.linhas, tab.colunas] = true;
+                    mat[pos.Linha, pos.Coluna] = true;
                 }
 
                 //Captura Peao (pode capturar somente na diagonal)
                 //diagonal esquerda 
-                pos.definirValores(tab.linhas + 1, tab.colunas - 1);
+                pos.definirValores(posicao.Linha + 1, posicao.Coluna - 1);
                 if (tab.posicaoValida(pos) && existeInimigo(pos))
                 {
-                    mat[tab.linhas, tab.colunas] = true;
+                    mat[pos.Linha, pos.Coluna] = true;
                 }
 
                 //diagonal direita 
-                pos.definirValores(tab.linhas + 1, tab.colunas + 1);
+                pos.definirValores(posicao.Linha + 1, posicao.Coluna + 1);
                 if (tab.posicaoValida(pos) && existeInimigo(pos))
                 {
-                    mat[tab.linhas, tab.colunas] = true;
+                    mat[pos.Linha, pos.Coluna] = true;
                 }
             }
 
