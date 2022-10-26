@@ -150,7 +150,20 @@ namespace xadrez
                 throw new TabuleiroException("Você não pode se colocar em xeque!");
             }
 
-            //Peca p = tab.peca(destino);
+            Peca p = tab.peca(destino);
+
+            //jogadaespecial promocao
+            if(p is Peao)
+            {
+                if((p.cor == Cor.Branca && destino.Linha == 0) || (p.cor == Cor.Preta && destino.Linha == 7))
+                {
+                    p = tab.retirarPeca(origem);
+                    pecas.Remove(p);
+                    Peca dama = new Dama(tab, p.cor);
+                    tab.colocarPeca(dama, destino);
+                    pecas.Add(dama);
+                }
+            }
             
             if(estaEmXeque(adversaria(jogadorAtual)))
             {
@@ -172,7 +185,6 @@ namespace xadrez
                 mudaJogador();
             }
 
-            Peca p = tab.peca(destino);
 
             //#jogadaespecial En Passant
             if(p is Peao &&(destino.Linha == origem.Linha + 2 || destino.Linha == origem.Linha - 2))
@@ -341,7 +353,7 @@ namespace xadrez
             colocarNovaPeca('c', 1, new Bispo(tab, Cor.Branca));
             colocarNovaPeca('c', 2, new Peao(tab, Cor.Branca, this));
             
-            colocarNovaPeca('d', 1, new Dama(tab, Cor.Branca, this));
+            colocarNovaPeca('d', 1, new Dama(tab, Cor.Branca));
             colocarNovaPeca('d', 2, new Peao(tab, Cor.Branca, this));
             
             colocarNovaPeca('e', 1, new Rei(tab, Cor.Branca, this));
@@ -366,7 +378,7 @@ namespace xadrez
             colocarNovaPeca('c', 8, new Bispo(tab, Cor.Preta));
             colocarNovaPeca('c', 7, new Peao(tab, Cor.Preta, this));
 
-            colocarNovaPeca('d', 8, new Dama(tab, Cor.Preta, this));
+            colocarNovaPeca('d', 8, new Dama(tab, Cor.Preta));
             colocarNovaPeca('d', 7, new Peao(tab, Cor.Preta, this));
 
             colocarNovaPeca('e', 8, new Rei(tab, Cor.Preta, this));
@@ -376,7 +388,7 @@ namespace xadrez
             colocarNovaPeca('f', 7, new Peao(tab, Cor.Preta, this));
 
             colocarNovaPeca('g', 8, new Cavalo(tab, Cor.Preta));
-            colocarNovaPeca('g', 7, new Peao(tab, Cor.Preta, this));
+            colocarNovaPeca('g', 7, new Peao(tab, Cor.Branca, this));
 
             colocarNovaPeca('h', 8, new Torre(tab, Cor.Preta));
             colocarNovaPeca('h', 7, new Peao(tab, Cor.Preta, this));

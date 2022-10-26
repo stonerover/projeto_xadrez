@@ -4,10 +4,8 @@ namespace xadrez
 {
     internal class Dama : Peca
     {
-        public PartidaDeXadrez partida { get; set; }
-        public Dama(Tabuleiro tab, Cor cor, PartidaDeXadrez partida) : base (tab, cor)
+        public Dama(Tabuleiro tab, Cor cor) : base (tab, cor)
         {
-            this.partida = partida;
         }
 
         public override string ToString()
